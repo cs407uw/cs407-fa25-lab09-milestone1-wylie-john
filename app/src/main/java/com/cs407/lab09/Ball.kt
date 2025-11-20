@@ -38,8 +38,8 @@ class Ball(
             return
         }
 
-        posX += velocityX * dT + (1f/6f) * (2 * accX + xAcc) * dT * dT
-        posY += velocityY * dT + (1f/6f) * (2 * accY + yAcc) * dT * dT
+        posX += velocityX * dT + (1f/6f) * (3 * accX + xAcc) * dT * dT
+        posY += velocityY * dT + (1f/6f) * (3 * accY + yAcc) * dT * dT
         velocityX += (accX + xAcc) / 2f * dT
         velocityY += (accY + yAcc) / 2f * dT
         accX = xAcc
@@ -54,24 +54,28 @@ class Ball(
     fun checkBoundaries() {
         val radius = ballSize / 2f
 
+        // Left wall
         if (posX - radius < 0f) {
             posX = radius
             velocityX = 0f
             accX = 0f
         }
 
+        // Right wall
         if (posX + radius > backgroundWidth) {
             posX = backgroundWidth - radius
             velocityX = 0f
             accX = 0f
         }
 
+        // Top wall
         if (posY - radius < 0f) {
             posY = radius
             velocityY = 0f
             accY = 0f
         }
 
+        // Bottom wall
         if (posY + radius > backgroundHeight) {
             posY = backgroundHeight - radius
             velocityY = 0f
